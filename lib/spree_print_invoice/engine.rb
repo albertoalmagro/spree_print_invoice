@@ -1,14 +1,10 @@
 module SpreePrintInvoice
-  class Engine < Rails::Engine
+  class Engine < ::Rails::Engine
     require 'spree/core'
     isolate_namespace Spree
     engine_name 'spree_print_invoice'
 
     config.autoload_paths += %W(#{config.root}/lib)
-
-    initializer 'spree.print_invoice.preferences', before: :load_config_initializers do
-      Spree::PrintInvoice::Config = Spree::PrintInvoiceSetting.new
-    end
 
     # use rspec for tests
     config.generators do |g|
